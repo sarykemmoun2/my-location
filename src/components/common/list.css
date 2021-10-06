@@ -1,0 +1,41 @@
+.listItem {
+    background-color: #f5f6f7;
+    margin: 1rem 0 1rem 0;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.chosenListItem {
+    background-color: #a5daaf;
+}
+
+.toolbar-title {
+margin-left: 40%;
+}
+
+.empty {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.list-container {
+     height: 600px
+}
+
+.MuiDataGrid-root .MuiDataGrid-menuIcon {
+    display: none !important;
+}
+
+.search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+}
+.MuiInputLabel-root {
+    margin: 10px;
+}
+.MuiOutlinedInput-input {
+    margin-left: 5px !important;
+
+}

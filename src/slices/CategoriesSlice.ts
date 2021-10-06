@@ -7,28 +7,20 @@ import {
 } from "../APIs/CategoriesAPIs";
 import { AppThunk, RootState } from "../store";
 
-export type ModalType = "edit" | "add" | "delete"
-  ;
 interface CategoriesState {
   categoriesList: string[];
   currentCategory: string | null;
   error: string | null;
-  modalStatus: ModalType | "";
 }
 
 const CATEGORY_EXISTS = "Category already exists";
+export const NO_CATEGORIES = "First, insert categoties"
 
 export const selectCategoriesList = (state: RootState) =>
   state.categories.categoriesList;
 export const selectCurrentCategory = (state: RootState) =>
   state.categories.currentCategory;
 export const selectError = (state: RootState) => state.categories.error;
-export const selectIsInputModalOpen = (state: RootState) =>
-  ["edit", "add"].includes(state.categories.modalStatus);
-export const selectIsDeleteModalOpen = (state: RootState) =>
-  state.categories.modalStatus === "delete";
-export const selectIsModalType = (state: RootState) =>
-  state.categories.modalStatus;
 
 export const getData = (): AppThunk => (dispatch) => {
   const data = getCategories();
@@ -45,6 +37,9 @@ export const addCategory = (category: string): AppThunk => (dispatch) => {
     : dispatch(setError(CATEGORY_EXISTS));
 };
 
+export const displayError = (error: string): AppThunk => (dispatch) => {
+  dispatch(setError(error))
+}
 export const removeCategory = (category: string): AppThunk => (dispatch) => {
   deleteCategoryAPI(category);
   dispatch(getData());
@@ -59,13 +54,6 @@ export const clearCurrentCategory = (): AppThunk => (dispatch) => {
   dispatch(setCurrentCategory(null));
 };
 
-export const openModal = (type: ModalType): AppThunk => (dispatch) => {
-  dispatch(setModalState(type));
-};
-
-export const closeModal = (): AppThunk => (dispatch) => {
-  dispatch(setModalState(""));
-};
 export const updateCategory = (
   oldCategory: string,
   newName: string
@@ -82,7 +70,6 @@ const categoriesSlice = createSlice({
   initialState: {
     categoriesList: [],
     currentCategory: null,
-    modalStatus: "",
     error: null,
   } as CategoriesState,
   reducers: {
@@ -95,9 +82,6 @@ const categoriesSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    setModalState: (state, action: PayloadAction<ModalType | "">) => {
-      state.modalStatus = action.payload;
-    },
   },
 });
 
@@ -105,7 +89,6 @@ const {
   dataLoaded,
   setCurrentCategory,
   setError,
-  setModalState,
 } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

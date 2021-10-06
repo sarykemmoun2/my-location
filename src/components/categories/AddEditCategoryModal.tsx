@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, DialogContent } from '@mui/material';
-import { selectCurrentCategory, selectIsModalType, addCategory, updateCategory, selectIsInputModalOpen, closeModal } from '../../slices/CategoriesSlice';
+import { selectIsModalType, selectIsInputModalOpen, closeModal } from '../../slices/MetadataSlice';
+import { selectCurrentCategory, addCategory, updateCategory } from '../../slices/CategoriesSlice';
 import ActionModal from '../common/ActionModal';
 
-const AddEditModal: React.FC = () => {
+const AddEditCategoryModal: React.FC = () => {
     const currentCategory = useSelector(selectCurrentCategory);
     const modalType = useSelector(selectIsModalType);
     const isModalOpen = useSelector(selectIsInputModalOpen)
@@ -50,5 +51,5 @@ const AddEditModal: React.FC = () => {
     />
 }
 
-export default AddEditModal;
+export default AddEditCategoryModal;
 

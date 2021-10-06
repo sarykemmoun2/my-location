@@ -1,16 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentCategory, removeCategory } from '../../slices/CategoriesSlice';
+import { selectCurrentLocation, removeLocation } from '../../slices/LocationsSlice';
 import { selectIsDeleteModalOpen, closeModal } from '../../slices/MetadataSlice';
 import ActionModal from '../common/ActionModal';
+import { defaultLocation } from './AddEditLocationModal';
 
-const DeleteModal: React.FC = () => {
-    const currentCategory = useSelector(selectCurrentCategory);
+const DeleteLocationModal: React.FC = () => {
+    const currentLocation = useSelector(selectCurrentLocation);
     const isModalOpen = useSelector(selectIsDeleteModalOpen);
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        dispatch(removeCategory(currentCategory || ""))
+        dispatch(removeLocation(currentLocation || defaultLocation))
     }
 
     const onClose = () => {
@@ -20,11 +21,11 @@ const DeleteModal: React.FC = () => {
     return <ActionModal
         onAction={handleDelete}
         onClose={onClose}
-        title={`Delete ${currentCategory} category?`}
+        title={`Delete ${currentLocation?.name} location?`}
         actionName="Delete"
         isModalOpen={isModalOpen}
     />
 }
 
-export default DeleteModal;
+export default DeleteLocationModal;
 

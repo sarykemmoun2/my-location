@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import CategoriesScreen from './components/categories/CategoriesScreen';
+import MainScreen from './components/MainScreen';
 
 function App() {
   return (
-    <CategoriesScreen />
+    <MainScreen />
   );
 }
 
